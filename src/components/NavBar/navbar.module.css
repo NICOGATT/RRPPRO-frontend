@@ -1,0 +1,22 @@
+.brand {
+    display: flex;
+    align-items: center;
+    width:20%;
+    margin-right: auto;
+}
+
+.logo {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.navbar {
+    background-color: var(--bs-danger-border-subtle);
+    height: 20vh;
+}
+
+.navLink {
+    color: var(--bs-danger-text-emphasis);
+    font-size: 25px;
+}
