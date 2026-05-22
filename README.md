@@ -1,16 +1,41 @@
-# React + Vite
+# RRPPRO-frontend
+## Este repo va hacer destinado a Ropa Para Profesionales, como TP para la facu, o para seguirlo mas adelante
+Tienda online desarrollada en React para la marca RP Pro, especializada en indumentaria profesional para peluquería canina y felina.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+La aplicación permite visualizar productos, filtrarlos por categoría, ver el detalle de cada prenda, agregarlas al carrito y simular una compra.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologías utilizadas
 
-## React Compiler
+- React
+- React Router DOM
+- Tailwind CSS
+- JavaScript
+- CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- Página de inicio con presentación de la marca
+- Catálogo de productos
+- Filtro por categoría
+- Buscador por nombre
+- Vista de detalle de producto
+- Carrito de compras
+- Aumentar y disminuir cantidades
+- Eliminar productos del carrito
+- Formulario de compra controlado
+- Confirmación de compra simulada
+- Diseño responsive
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Autores del proyecto
+- Nicolas Gatti
+- Nicolas Cao
+- Rocio Carrizo
+
+## Instalación
+
+Clonar el repositorio:
+
+```bash
+git clone URL_DEL_REPOSITORIO
