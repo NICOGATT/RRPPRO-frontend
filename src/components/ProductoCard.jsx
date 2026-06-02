@@ -24,7 +24,7 @@ const ProductoCard = ({producto}) => {
                 <Card.Title>{nombre}</Card.Title>
                 <Card.Text className="fs-5 fw-bold mt-auto">${precio.toLocaleString('es-AR')}</Card.Text>
                 <div className="d-flex justify-content-between align-items-center mt-3 gap-2">
-                    <Link to={'/producto/${id}'}>
+                    <Link to={`/producto/${id}`}>
                         <Button variant="outline-primary" size="sm">+ info
                         </Button>
                     </Link>
