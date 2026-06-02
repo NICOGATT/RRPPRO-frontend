@@ -87,7 +87,7 @@
     "descripcion": "Collar de púas una hilera. 5 cm de ancho, 12 a 18 cm de circunferencia",
     "precio": 12800,
     "stock": 2,
-    "imagenes": ["/img/3204.jpeg"]
+    "imagenes": ["/img/3204.jpg"]
   },
   {
     "id": 3203,
@@ -96,7 +96,7 @@
     "descripcion": "Collar de púas de 3 hileras, 7 cm de ancho, 15 a 20 cm de circunferencia ",
     "precio": 14000,
     "stock": 10,
-    "imagenes": ["/img/3204.jpeg"]
+    "imagenes": ["/img/3203.jpg"]
   },
   {
     "id": 3201,
@@ -105,7 +105,7 @@
     "descripcion": "Arnés de pecho de neoprene",
     "precio": 22500,
     "stock": 6,
-    "imagenes": ["/img/3201.jpeg"]
+    "imagenes": ["/img/3201.jpg"]
   },
     {
     "id": 3205,
@@ -114,7 +114,7 @@
     "descripcion": "Correa extensible hasta 5,5 mts",
     "precio": 30000,
     "stock": 6,
-    "imagenes": ["/img/3205.jpeg"]
+    "imagenes": ["/img/3205.jpg"]
   },
   {
     "id": 3206,
@@ -123,6 +123,6 @@
     "descripcion": "Bolso transportador XL con interior impermeable y manijas reforzadas. Llevalo con vos a todos lados.",
     "precio": 85000,
     "stock": 6,
-    "imagenes": ["/img/3206.jpeg"]
+    "imagenes": ["/img/3206.jpg"]
   }
 ]

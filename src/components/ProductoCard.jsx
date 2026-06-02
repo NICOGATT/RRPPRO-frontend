@@ -22,10 +22,10 @@ const ProductoCard = ({producto}) => {
             <Card.Body className="d-flex flex-column">
                 <Card.Subtitle className="mb-2 text-muted">{categoria}</Card.Subtitle>
                 <Card.Title>{nombre}</Card.Title>
-                <Card.Text className="fs-5 fw-bold mt-auto">${precio}</Card.Text>
-                <div className="d-flex justify-content-between align-items-center mt-3">
+                <Card.Text className="fs-5 fw-bold mt-auto">${precio.toLocaleString('es-AR')}</Card.Text>
+                <div className="d-flex justify-content-between align-items-center mt-3 gap-2">
                     <Link to={'/producto/${id}'}>
-                        <Button variant="outline-primary" size="sm">Ver detalle +
+                        <Button variant="outline-primary" size="sm">+ info
                         </Button>
                     </Link>
                     <Button
