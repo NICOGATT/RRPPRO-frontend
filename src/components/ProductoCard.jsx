@@ -1,9 +1,16 @@
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const ProductoCard = ({producto}) => {
+const ProductoCard = ({producto, agregarAlCarrito, carrito}) => {
     const { id, nombre, precio, stock, imagenes, categoria } = producto;
+
     const sinStock = stock === 0;
+
+    const enCarrito = carrito.find(item => item.id === producto.id);
+    
+    const maxAlcanzado = enCarrito?.cantidad >= producto.stock;
+
+    
     return (
         <Card className='h100 shadow-sm'>
             <div style={{ position: 'relative' }}>
@@ -31,7 +38,9 @@ const ProductoCard = ({producto}) => {
                     <Button
                         variant={sinStock ? "secondary" : "success"}
                         size="sm"
-                        disabled={sinStock}>
+                        disabled={sinStock || maxAlcanzado}
+                        onClick={() => agregarAlCarrito(producto)}>
+
                     Agregar al 🛒
                     </Button>
                 </div>

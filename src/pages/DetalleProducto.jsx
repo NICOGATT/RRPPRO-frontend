@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Button, Badge } from "react-bootstrap";
 import productosData from "../data/productos.json";
 
-function DetalleProducto() {
+function DetalleProducto({ agregarAlCarrito, carrito}) {
   const { id } = useParams();
 
   const producto = productosData.find(
@@ -14,6 +14,10 @@ function DetalleProducto() {
   }
 
   const sinStock = producto.stock === 0;
+
+  const enCarrito = carrito.find(item => item.id === producto.id);
+
+  const maxAlcanzado = enCarrito?.cantidad >= producto.stock;
 
   return (
     <Container className="my-5">
@@ -56,11 +60,9 @@ function DetalleProducto() {
               </Button>
             </Link>
 
-            <Button
-              variant="success"
-              disabled={sinStock}
-            >
-              Agregar al carrito
+            <Button variant="success" disabled={sinStock || maxAlcanzado}
+              onClick={() => agregarAlCarrito(producto)} >
+              Agregar al 🛒
             </Button>
           </div>
         </Col>

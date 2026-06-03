@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import logo from '../../assets/rpmLogo.png';
 import styles from './navbar.module.css'; 
 import { Link, NavLink } from "react-router-dom";
-function NavBar() {
+function NavBar({totalProductos}) {
     return (
         <Navbar data-bs-theme="dark" expand="lg" className={`${styles.navbar} shadow-sm`}>
             <Container fluid className="px-5">
@@ -20,6 +20,8 @@ function NavBar() {
                         <Nav.Link className={styles.navLink} as={NavLink} to="/productos">
                             Productos
                         </Nav.Link>
+
+                        <Nav.Link as={Link} to="/carrito">🛒({totalProductos}) Carrito</Nav.Link>
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">

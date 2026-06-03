@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import productosData from '../data/productos.json';
 import ProductoCard from '../components/ProductoCard';
 
-function Productos() {
+function Productos({ agregarAlCarrito, carrito}) {
   const [listaProductos, setListaProductos] = useState(productosData);
   const [categoriaActiva, setCategoriaActiva] = useState('Todas');
   const [ordenPrecio, setOrdenPrecio] = useState(null);
@@ -66,7 +66,7 @@ function Productos() {
       <Row className="g-4">
         {listaProductos.map((producto) => (
           <Col key={producto.id} xs={12} sm={6} md={4} lg={3}>
-            <ProductoCard producto={producto} />
+            <ProductoCard producto={producto} agregarAlCarrito={agregarAlCarrito} carrito={carrito}/>
           </Col>
         ))}
       </Row>
