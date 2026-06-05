@@ -1,66 +1,76 @@
-import './App.css'
-import { useState } from 'react';
-import NavBar from './components/NavBar/NavBar'
-import { Route, Routes } from 'react-router-dom'
-import Inicio from './pages/Inicio'
-import Productos from './pages/Productos'
-import Carrito from './pages/Carrito'
-import Contacto from './pages/Contacto'
-import Footer from './components/Footer'
+import "./App.css";
+import { useState, useEffect } from "react";
+import NavBar from "./components/NavBar/NavBar";
+import { Route, Routes } from "react-router-dom";
+import Inicio from "./pages/Inicio";
+import Productos from "./pages/Productos";
+import Carrito from "./pages/Carrito";
+import Contacto from "./pages/Contacto";
+import Footer from "./components/Footer";
 import DetalleProducto from "./pages/DetalleProducto";
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from "./components/ScrollToTop";
+import FormularioCompra from "./pages/FormularioCompra";
 function App() {
-  const [carrito, setCarrito] = useState([])
+  const [carrito, setCarrito] = useState(() => {
+    const carritoGuardado = localStorage.getItem("cart");
+    return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+  });
 
-  const agregarAlCarrito = (producto) => {
-    const existente = carrito.find(item=> item.id === producto.id)
-    
-    if (existente) {
-      if (existente.cantidad >= producto.stock) return;
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(carrito));
+  }, [carrito]);
 
-      setCarrito(carrito.map(item => item.id === producto.id ? { ...item, cantidad: item.cantidad + 1} : item));
-    } else { 
-      if(producto.stock === 0) return;
+    const agregarAlCarrito = (producto) => {
+    setCarrito((carritoActual) => {
+      const existe = carritoActual.find((item) => item.id === producto.id);
 
-      setCarrito ([...carrito,{ ...producto, cantidad: 1}]);
-  }
-};
+      if (existe) {
+        return carritoActual.map((item) =>
+          item.id === producto.id
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
+        );
+      }
 
-const eliminarProducto = (id) => {
-  setCarrito(
-    carrito.filter(producto => producto.id !== id)
+      return [...carritoActual, { ...producto, cantidad: 1 }];
+    });
+  };
+
+
+  const eliminarProducto = (id) => {
+    setCarrito((carrito) => carrito.filter((producto) => producto.id !== id));
+  };
+
+  const aumentarCantidad = (id) => {
+    setCarrito(
+      carrito.map((producto) =>
+        producto.id === id
+          ? {
+              ...producto,
+              cantidad: producto.cantidad + 1,
+            }
+          : producto,
+      ),
+    );
+  };
+
+  const disminuirCantidad = (id) => {
+    setCarrito(
+      carrito.map((producto) => {
+        if (producto.id !== id) return producto;
+
+        return {
+          ...producto,
+          cantidad: producto.cantidad - 1,
+        };
+      }),
+    );
+  };
+
+  const totalProductos = carrito.reduce(
+    (total, producto) => total + producto.cantidad,
+    0,
   );
-};
-
-const aumentarCantidad = (id) => {
-  setCarrito(
-    carrito.map(producto =>
-      producto.id === id
-        ? {
-            ...producto,
-            cantidad: producto.cantidad + 1
-          }
-        : producto
-    )
-  );
-};
-
-const disminuirCantidad = (id) => {
-  setCarrito(
-    carrito.map(producto => {
-      if (producto.id !== id) return producto;
-
-      return {
-        ...producto,
-        cantidad: producto.cantidad - 1
-      };
-    })
-  );
-};
-
-
-const totalProductos = carrito.reduce((total, producto) =>
-         total + producto.cantidad,0);
 
   return (
     <>
@@ -70,20 +80,43 @@ const totalProductos = carrito.reduce((total, producto) =>
       <Routes>
         <Route path="/" element={<Inicio />} />
 
-        <Route path="/productos" element={<Productos agregarAlCarrito={agregarAlCarrito} carrito={carrito}/>} />
+        <Route
+          path="/productos"
+          element={
+            <Productos agregarAlCarrito={agregarAlCarrito} carrito={carrito} />
+          }
+        />
 
-        <Route path="/producto/:id" element={<DetalleProducto agregarAlCarrito={agregarAlCarrito}
-        carrito={carrito}/>}/>
+        <Route
+          path="/producto/:id"
+          element={
+            <DetalleProducto
+              agregarAlCarrito={agregarAlCarrito}
+              carrito={carrito}
+            />
+          }
+        />
 
-        <Route path='/carrito' element={<Carrito carrito={carrito} setCarrito={setCarrito}
-         eliminarProducto={eliminarProducto} aumentarCantidad={aumentarCantidad}
-          disminuirCantidad={disminuirCantidad} totalProductos={totalProductos}/>}/>
+        <Route
+          path="/carrito"
+          element={
+            <Carrito
+              carrito={carrito}
+              setCarrito={setCarrito}
+              eliminarProducto={eliminarProducto}
+              aumentarCantidad={aumentarCantidad}
+              disminuirCantidad={disminuirCantidad}
+              totalProductos={totalProductos}
+            />
+          }
+        />
 
         <Route path="/contactos" element={<Contacto />} />
+        <Route path="/formulario-compra" element={<FormularioCompra carrito={carrito} eliminarProducto={eliminarProducto}/>}/>
       </Routes>
-      <Footer/>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
