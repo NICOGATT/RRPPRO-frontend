@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import style from "./formulario.module.css";
 import { Col, Row, Card, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router";
 
-function FormularioCompra({ carrito, eliminarProducto }) {
+function FormularioCompra({ carrito, eliminarProducto, vaciarCarrito }) {
     const [mostrarModal, setMostrarModal] = useState(false);
     const total = carrito.reduce(
         (acc, producto) => acc + producto.precio * producto.cantidad,
         0,
     );
+
+    const navigate = useNavigate()
+
+    const [nombre, setNombre] = useState("");
+    const [dni, setDni] = useState("");
+    const [tarjeta, setTarjeta] = useState("");
+
+    const finalizarCompra = () => {
+        if (!nombre || !dni || !tarjeta) {
+            alert("Complete todos los campos");
+            return;
+        }
+        setMostrarModal(true);
+        vaciarCarrito();
+    };
+
     return (
         <div>
         <h2 className={style.title}>Formulario de compra</h2>
@@ -23,18 +40,23 @@ function FormularioCompra({ carrito, eliminarProducto }) {
                     <Form.Control
                     type="text"
                     placeholder="Indique su nombre de titular"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>DNI</Form.Label>
-                    <Form.Control type="text" placeholder="Indique su dni aca" />
+                    <Form.Control type="text" placeholder="Indique su dni aca" value={dni} onChange={(e) => setDni(e.target.value)}/>
+
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Numero de tarjeta</Form.Label>
                     <Form.Control
                     type="text"
                     placeholder="Indique su numero de tarjeta aca"
+                    value={tarjeta}
+                    onChange={(e) => setTarjeta(e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -61,17 +83,12 @@ function FormularioCompra({ carrito, eliminarProducto }) {
                 </Modal.Body>
 
                 <Modal.Footer className="justify-content-center">
-                    {carrito.map((producto) => (
-                            <Button
-                                variant="success"
-                                onClick={() => {
-                                    setMostrarModal(false); 
-                                    eliminarProducto(producto.id)
-                                }}
-                            >
+                    
+                            <Button variant="success" onClick={() => { setMostrarModal(false);  navigate("/carrito") ;}}>
                             Aceptar
                         </Button>
-                    ))}
+                        
+                   
                 </Modal.Footer>
                 </Modal>
                 {carrito.length == 0 ? (
@@ -136,7 +153,7 @@ function FormularioCompra({ carrito, eliminarProducto }) {
                     <div className="text-center mt-4">
                     <Button
                         variant="primary"
-                        onClick={() => setMostrarModal(true)}
+                        onClick={ finalizarCompra }
                     >
                         Finalizar compra
                     </Button>

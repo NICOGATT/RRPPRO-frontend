@@ -16,6 +16,10 @@ function App() {
     return carritoGuardado ? JSON.parse(carritoGuardado) : [];
   });
 
+  function vaciarCarrito(){
+        setCarrito([])
+    }
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(carrito));
   }, [carrito]);
@@ -35,6 +39,8 @@ function App() {
       return [...carritoActual, { ...producto, cantidad: 1 }];
     });
   };
+
+  
 
 
   const eliminarProducto = (id) => {
@@ -112,7 +118,8 @@ function App() {
         />
 
         <Route path="/contactos" element={<Contacto />} />
-        <Route path="/formulario-compra" element={<FormularioCompra carrito={carrito} eliminarProducto={eliminarProducto}/>}/>
+        <Route path="/formulario-compra" element={<FormularioCompra 
+        carrito={carrito} eliminarProducto={eliminarProducto} vaciarCarrito={vaciarCarrito}/>}/>
       </Routes>
       <Footer />
     </>

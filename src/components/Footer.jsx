@@ -48,9 +48,9 @@ function Footer() {
                         +54 9 11 4086 9806
                     </a>
                     <div className="mt-4">
-                        <p className="mb-1">Instagram</p>
-                        <p className="mb-1">Facebook</p>
-                        <p className="mb-1">Tik Tok</p>
+                        <p className="mb-1"><Link to="/" className="footer-link">Instagram </Link></p>
+                        <p className="mb-1"><Link to="/" className="footer-link">Facebook</Link></p>
+                        <p className="mb-1" ><Link to="/" className="footer-link">Tik Tok</Link></p> 
                     </div>
                 </Col>
             </Row>
