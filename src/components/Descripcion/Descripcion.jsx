@@ -2,7 +2,7 @@ import React from 'react'
 import Container from "react-bootstrap/Container";
 function Descripcion() {
   return (
-    <section className='py-5 bg-light'>
+    <section className='py-5 bg-body-tertiary'>
         <Container>
             <h2 className='text-center mb-4'>
                 Sobre RPM

@@ -31,7 +31,7 @@ La aplicación permite visualizar productos, filtrarlos por categoría, ver el d
 ## Autores del proyecto
 - Nicolas Gatti
 - Nicolas Cao
-- Rocio Carrizo
+- Rocio García del Corro
 
 ## Instalación
 

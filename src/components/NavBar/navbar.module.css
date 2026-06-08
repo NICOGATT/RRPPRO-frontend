@@ -12,9 +12,14 @@
 }
 
 .navbar {
-    background-color: var(--bs-danger-border-subtle);
+    background-color: #f8c8e4;
     height: 18vh;
     border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+:global([data-bs-theme="dark"]) .navbar {
+    background-color: #212529; 
 }
 
 .navLink {

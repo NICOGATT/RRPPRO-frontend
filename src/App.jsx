@@ -10,15 +10,17 @@ import Footer from "./components/Footer";
 import DetalleProducto from "./pages/DetalleProducto";
 import ScrollToTop from "./components/ScrollToTop";
 import FormularioCompra from "./pages/FormularioCompra";
+import { Toast, ToastContainer, ToastHeader } from "react-bootstrap";
 function App() {
+  const [mostrarToast, setMostrarToast] = useState(false);
   const [carrito, setCarrito] = useState(() => {
     const carritoGuardado = localStorage.getItem("cart");
     return carritoGuardado ? JSON.parse(carritoGuardado) : [];
   });
-
-  function vaciarCarrito(){
-        setCarrito([])
-    }
+  const [temaOscuro, setTemaOscuro] = useState(() => {
+    const temaGuardado = localStorage.getItem("temaOscuro");
+    return temaGuardado === "true";
+  });
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(carrito));
@@ -34,15 +36,28 @@ function App() {
             ? { ...item, cantidad: item.cantidad + 1 }
             : item
         );
-      }
+        }
 
       return [...carritoActual, { ...producto, cantidad: 1 }];
     });
+    setMostrarToast(true);
   };
 
+ 
+  useEffect(() => {
+    localStorage.setItem("temaOscuro", temaOscuro);
+    document.documentElement.setAttribute('data-bs-theme', temaOscuro ? 'dark' : 'light');
+  }, [temaOscuro]);
+
+
+   function vaciarCarrito(){
+        setCarrito([])
+    }
+
+  const toggleTema = () => {
+    setTemaOscuro(!temaOscuro);
+  };
   
-
-
   const eliminarProducto = (id) => {
     setCarrito((carrito) => carrito.filter((producto) => producto.id !== id));
   };
@@ -82,7 +97,11 @@ function App() {
     <>
       <ScrollToTop />
 
-      <NavBar totalProductos={totalProductos} />
+      <NavBar 
+        totalProductos={totalProductos}
+        temaOscuro={temaOscuro}
+        toggleTema={toggleTema} 
+      />
       <Routes>
         <Route path="/" element={<Inicio />} />
 
@@ -122,6 +141,20 @@ function App() {
         carrito={carrito} eliminarProducto={eliminarProducto} vaciarCarrito={vaciarCarrito}/>}/>
       </Routes>
       <Footer />
+      <ToastContainer position="top-end" className="p-3 mt-5" style={{ position: 'fixed', zIndex: 1050 }}>
+        <Toast 
+          show={mostrarToast} 
+          onClose={() => setMostrarToast(false)} 
+          autohide 
+          delay={3000}
+          bg="success" 
+        >
+          <ToastHeader />
+          <Toast.Body className="text-white fw-bold">
+            Producto agregado al carrito.
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </>
   );
 }
